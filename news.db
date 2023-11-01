@@ -1,0 +1,37 @@
+import sqlite
+
+CREATE TABLE groups (
+    id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE subscriptions (
+    id INTEGER PRIMARY KEY,
+    chat_id INTEGER,
+    group_id INTEGER,
+    FOREIGN KEY(group_id) REFERENCES groups(id)
+);
+
+CREATE TABLE news (
+    id INTEGER PRIMARY KEY,
+    group_id INTEGER,
+    title TEXT,
+    link TEXT,
+    date TEXT,
+    FOREIGN KEY(group_id) REFERENCES groups(id)
+);
+INSERT INTO groups (id, name) VALUES (1, 'Группа 1');
+INSERT INTO groups (id, name) VALUES (2, 'Группа 2');
+INSERT INTO groups (id, name) VALUES (3, 'Группа 3');
+
+
+INSERT INTO news (id, group_id, title, link, date) VALUES (1, 1, 'Новость 1', 'https://www.leagueofgraphs.com/ru/champions/runes/seraphine', '2021-01-01');
+INSERT INTO news (id, group_id, title, link, date) VALUES (2, 1, 'Новость 2', 'https://www.leagueofgraphs.com/ru/champions/runes/seraphine');
+INSERT INTO news (id, group_id, title, link, date) VALUES (3, 2, 'Новость 3', 'https://www.leagueofgraphs.com/ru/champions/runes/seraphine');
+INSERT INTO news (id, group_id, title, link, date) VALUES (4, 2, 'Новость 4', 'https://www.leagueofgraphs.com/ru/champions/runes/seraphine', '2021-01-04');
+INSERT INTO news (id, group_id, title, link, date) VALUES (5, 3, 'Новость 5', 'https://www.leagueofgraphs.com/ru/champions/runes/seraphine', '2021-01-05');
+
+INSERT INTO subscriptions (id, chat_id, group_id) VALUES (1, 123, 1);
+INSERT INTO subscriptions (id, chat_id, group_id) VALUES (2, 456, 1);
+INSERT INTO subscriptions (id, chat_id, group_id) VALUES (3, 789, 2);
+INSERT INTO subscriptions (id, chat_id, group_id) VALUES (4, 123, 3);
